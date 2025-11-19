@@ -144,6 +144,18 @@ h1 {
     transform: translateY(0);
 }
 
+/* Info Banner */
+.info-banner {
+    background: #17a2b8;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
 /* Error Banner */
 .error-banner {
     background: #dc3545;

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Store - Network Failure Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Product Store</h1>
+            <p class="subtitle">Network Failure Simulation Demo (GitHub Pages)</p>
+        </header>
+
+        <!-- Failure Toggle Control -->
+        <div class="control-panel">
+            <div class="toggle-container">
+                <label class="toggle-label">
+                    <input type="checkbox" id="failureToggle" class="toggle-checkbox">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-text">Failure Mode</span>
+                </label>
+            </div>
+            <div class="failure-type-selector">
+                <label>
+                    <input type="radio" name="failureType" value="timeout" checked>
+                    Timeout (3s+)
+                </label>
+                <label>
+                    <input type="radio" name="failureType" value="503">
+                    503 Service Unavailable
+                </label>
+            </div>
+            <button id="loadProducts" class="load-btn">Load Products</button>
+        </div>
+
+        <!-- Info Banner -->
+        <div class="info-banner">
+            This is a client-side simulation running entirely in your browser (no backend server needed)
+        </div>
+
+        <!-- Error Banner (hidden by default) -->
+        <div id="errorBanner" class="error-banner hidden">
+            <span class="error-icon">⚠️</span>
+            <span id="errorMessage"></span>
+            <button id="closeError" class="close-btn">×</button>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Loading products...</p>
+        </div>
+
+        <!-- Product List -->
+        <div id="productList" class="product-grid"></div>
+
+        <!-- Console Log Display -->
+        <div class="console-section">
+            <h3> Error Logs (Console Output)</h3>
+            <pre id="consoleLog" class="console-log">Logs will appear here when errors occur...</pre>
+        </div>
+    </div>
+
+    <script src="app-github-pages.js"></script>
+</body>
+</html>
