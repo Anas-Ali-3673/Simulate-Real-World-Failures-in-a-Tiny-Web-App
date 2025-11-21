@@ -1,24 +1,18 @@
 {
-  "name": "product-store-network-failure-sim",
+  "name": "network-failure-simulator",
   "version": "1.0.0",
-  "description": "A web app simulating network failures (timeout and 503 errors) for educational purposes",
-  "main": "server.js",
+  "description": "Product list app simulating network failures (timeout/503)",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
-  "keywords": [
-    "network-failure",
-    "simulation",
-    "timeout",
-    "503",
-    "error-handling",
-    "demo"
-  ],
-  "author": "",
-  "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5"
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

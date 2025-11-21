@@ -1,262 +1,193 @@
-# Product Store - Network Failure Simulation
+# Network Failure Simulator - Product List App
 
-A single-page web application that demonstrates **real-world network failure scenarios** with structured error logging and user-friendly error handling.
+## Assignment: Option D - Network Failure (simulated)
 
-## 🎯 Project Overview
+A single-page web application that displays a product list and simulates real-world network failures including **timeouts** and **503 Service Unavailable** errors.
 
-**Failure Type Implemented:** Option D — Network Failure (simulated)
+## 🎯 What This App Does
 
-This application simulates two critical network failure scenarios:
-1. **Request Timeout** - Server response delayed beyond client timeout threshold (3 seconds)
-2. **503 Service Unavailable** - Server temporarily unable to handle requests
+- **Happy Path**: Fetches and displays a list of 10 products from a mock API endpoint
+- **Failure Simulation**: Toggle between normal operation, timeout errors, and 503 errors
+- **Error Handling**: Displays a crash banner when network failures occur
+- **Structured Logging**: Outputs detailed JSON logs to the browser console
 
-## 🚀 Features
+## 🛠️ Tech Stack
 
-### Happy Path (Normal Operation)
-- Product list page displaying 12 sample products
-- Clean, responsive UI with product cards showing name, category, price, and stock
-- Real-time loading indicators
-- Success logging to console
+- **Framework**: Next.js 14 (React)
+- **Deployment**: Vercel-ready
+- **API**: Mock server built with Next.js API routes
 
-### Failure Simulation
-- **Failure Toggle**: Checkbox to enable/disable failure mode
-- **Failure Type Selector**: Radio buttons to choose between:
-  - Timeout (5-second delay exceeding 3-second client timeout)
-  - 503 Service Unavailable error
-- **Error Banner**: User-friendly crash message displayed at the top
-- **Structured Logging**: JSON-formatted error logs with comprehensive details
+## 📋 Prerequisites
 
-## 📋 Requirements Met
+- Node.js 18.0.0 or higher
+- npm or yarn package manager
 
-✅ Working "happy path" before failure is toggled  
-✅ Failure Toggle that deterministically injects the fault  
-✅ Crash/error banner with human-readable messages  
-✅ Structured JSON logs printed to console  
-✅ README with setup, run instructions, and examples  
+## 🚀 How to Run Locally
 
-## 🛠️ Technology Stack
-
-- **Frontend**: Vanilla JavaScript (ES6+), HTML5, CSS3
-- **Backend**: Node.js, Express.js
-- **Styling**: Custom CSS with gradient design
-- **Server**: Express with CORS support
-- **Deployment**: GitHub Pages (client-side version available)
-
-## 🌐 Live Demo
-
-**GitHub Pages (Client-Side Version):**  
-🔗 [https://anas-ali-3673.github.io/Simulate-Real-World-Failures-in-a-Tiny-Web-App/](https://anas-ali-3673.github.io/Simulate-Real-World-Failures-in-a-Tiny-Web-App/)
-
-> The GitHub Pages version runs entirely in the browser without a backend server. See [DEPLOYMENT.md](DEPLOYMENT.md) for details.
-
-## 📦 Installation & Setup
-
-### Prerequisites
-- Node.js (v14 or higher)
-- npm (comes with Node.js)
-
-### Installation Steps
-
-1. **Navigate to the project directory:**
-   ```bash
-   cd "c:\Users\HP\Desktop\SSD#4"
-   ```
-
-2. **Install dependencies:**
+1. **Install dependencies**:
    ```bash
    npm install
    ```
 
-3. **Start the server:**
+2. **Start development server**:
    ```bash
-   npm start
+   npm run dev
    ```
 
-4. **Open the application:**
-   - The server will start on `http://localhost:3000`
-   - Open your web browser and navigate to: `http://localhost:3000`
+3. **Open in browser**:
+   ```
+   http://localhost:3000
+   ```
 
-## 🎮 How to Use
+## 📦 Deploy to Vercel
+
+1. **Push to GitHub**:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git remote add origin <your-repo-url>
+   git push -u origin main
+   ```
+
+2. **Deploy on Vercel**:
+   - Go to [vercel.com](https://vercel.com)
+   - Click "New Project"
+   - Import your GitHub repository
+   - Click "Deploy" (Vercel auto-detects Next.js)
+
+## 🎮 How to Use & Trigger Failures
 
 ### Normal Operation (Happy Path)
 
-1. **Load Products Successfully:**
-   - Ensure the "Failure Mode" toggle is **OFF** (grey)
-   - Click the **"Load Products"** button
-   - Products will load successfully and display in a grid
-   - Check the console log section for success logs
+1. Open the app
+2. Ensure "Normal (Happy Path)" is selected
+3. Click "Fetch Products"
+4. You should see 10 products displayed in a grid
+5. Check console for successful log entry
 
-### Triggering Failures
+### Simulate Timeout
 
-#### Option 1: Timeout Failure
+1. Select "⏱️ Simulate Timeout" radio button
+2. Click "Fetch Products"
+3. The request will take 10+ seconds
+4. Client-side timeout (5s) will trigger first
+5. You'll see error banner: **"Network failure: request timed out (client timeout: 5000ms)"**
+6. Check console for timeout log
 
-1. **Enable Failure Mode:**
-   - Toggle the **"Failure Mode"** switch **ON** (turns red)
-   
-2. **Select Timeout:**
-   - Select the radio button: **"Timeout (5s delay)"**
+### Simulate 503 Service Unavailable
 
-3. **Trigger the Failure:**
-   - Click **"Load Products"**
-   
-4. **Expected Behavior:**
-   - Loading spinner appears
-   - After 3 seconds, request times out
-   - **Error Banner** displays: `"Network failure: request timed out (exceeded 3000ms)"`
-   - Structured error log appears in the console section and browser console
+1. Select "❌ Simulate 503 Error" radio button
+2. Click "Fetch Products"
+3. After ~200ms, the server returns 503
+4. You'll see error banner: **"Network failure: 503 Service Unavailable"**
+5. Check console for 503 log
 
-#### Option 2: 503 Service Unavailable
+## 📊 Expected Console Logs
 
-1. **Enable Failure Mode:**
-   - Toggle the **"Failure Mode"** switch **ON** (turns red)
-   
-2. **Select 503 Error:**
-   - Select the radio button: **"503 Service Unavailable"**
-
-3. **Trigger the Failure:**
-   - Click **"Load Products"**
-   
-4. **Expected Behavior:**
-   - Loading spinner appears briefly
-   - **Error Banner** displays: `"Network failure: 503 Service Unavailable"`
-   - Structured error log appears in the console section and browser console
-
-## 📊 Expected Log Examples
-
-### Timeout Error Log
-
+### Success Log (Happy Path)
 ```json
 {
-  "timestamp": "2025-11-19T14:23:45.678Z",
-  "url": "http://localhost:3000/api/products?failure=timeout",
+  "timestamp": "2025-11-21T10:30:45.123Z",
+  "url": "/api/products",
   "method": "GET",
-  "latencyMs": 3001,
-  "statusOrReason": "Request timeout",
+  "latencyMs": 152,
+  "statusOrReason": 200,
+  "errorCode": null,
+  "message": "Successfully retrieved products"
+}
+```
+
+### Timeout Log
+```json
+{
+  "timestamp": "2025-11-21T10:31:15.456Z",
+  "url": "/api/products",
+  "method": "GET",
+  "latencyMs": 10003,
+  "statusOrReason": "TIMEOUT",
   "errorCode": "NET_TIMEOUT",
-  "message": "Network failure: request timed out (exceeded 3000ms)",
-  "timeoutThreshold": 3000
+  "message": "Request timed out - server took too long to respond"
 }
 ```
 
-### 503 Service Unavailable Log
-
+### 503 Error Log
 ```json
 {
-  "timestamp": "2025-11-19T14:25:12.345Z",
-  "url": "http://localhost:3000/api/products?failure=503",
+  "timestamp": "2025-11-21T10:32:00.789Z",
+  "url": "/api/products",
   "method": "GET",
-  "latencyMs": 45,
-  "statusCode": 503,
-  "statusText": "Service Unavailable",
+  "latencyMs": 203,
+  "statusOrReason": 503,
   "errorCode": "NET_503",
-  "message": "Network failure: 503 Service Unavailable"
+  "message": "503 Service Unavailable - server temporarily unavailable"
 }
 ```
 
-### Success Log (Normal Operation)
-
-```json
-{
-  "timestamp": "2025-11-19T14:20:30.123Z",
-  "url": "http://localhost:3000/api/products",
-  "method": "GET",
-  "latencyMs": 12,
-  "status": 200,
-  "productCount": 12,
-  "message": "Products loaded successfully"
-}
-```
-
-## 🗂️ Project Structure
+## 🏗️ Project Structure
 
 ```
-SSD#4/
-├── index.html          # Main HTML page with UI structure
-├── styles.css          # CSS styling for the application
-├── app.js             # Frontend JavaScript (API calls, error handling, UI updates)
-├── server.js          # Backend Express server (API endpoints, failure simulation)
-├── package.json       # Node.js dependencies and scripts
-└── README.md          # This file
+.
+├── pages/
+│   ├── api/
+│   │   └── products.js        # Mock API endpoint with failure injection
+│   ├── _app.js                # Next.js app wrapper
+│   └── index.js               # Main product list page with UI
+├── styles/
+│   ├── globals.css            # Global styles
+│   └── Home.module.css        # Component-specific styles
+├── package.json               # Dependencies
+├── next.config.js             # Next.js configuration
+├── vercel.json                # Vercel deployment config
+└── README.md                  # This file
 ```
 
-## 🔍 Technical Implementation Details
+## ✅ Assignment Requirements Checklist
 
-### Client-Side (Frontend)
+- ✅ **Working happy path**: Products load successfully when no failure is toggled
+- ✅ **Failure Toggle**: UI controls to deterministically inject timeout or 503 errors
+- ✅ **Crash/Error Banner**: Red error banner displays human-readable messages
+- ✅ **Structured Logs**: JSON logs printed to console with all required fields:
+  - `timestamp`: ISO 8601 format
+  - `url`: Request endpoint
+  - `method`: HTTP method
+  - `latencyMs`: Request duration in milliseconds
+  - `statusOrReason`: HTTP status code or error reason
+  - `errorCode`: Error classification (NET_TIMEOUT, NET_503, etc.)
+  - `message`: Human-readable description
+- ✅ **README**: Complete setup and usage instructions
+- ✅ **Vercel-ready**: Can be deployed with zero configuration
 
-**Request Timeout Logic:**
-- Uses `AbortController` to cancel requests after 3 seconds
-- Tracks request start time for accurate latency measurement
-- Catches `AbortError` and converts to structured `NetworkError`
+## 🎯 Failure Type: Option D
 
-**Error Handling:**
-- Custom `NetworkError` class for consistent error structure
-- Separate error banner for user-friendly messages
-- Console log display for technical debugging
+**Network Failure (simulated)**
 
-**UI Features:**
-- Loading spinner during API calls
-- Animated product cards on successful load
-- Real-time console log display in the UI
+This app simulates two types of network failures:
+1. **Timeout**: Server delays response beyond client timeout threshold (5 seconds)
+2. **503 Service Unavailable**: Server returns HTTP 503 status code
 
-### Server-Side (Backend)
+Both failures are triggered via a UI toggle and produce detailed structured logs.
 
-**Timeout Simulation:**
-- 5-second delay using `setTimeout` with async/await
-- Exceeds client timeout threshold (3s) to trigger timeout
+## 🔍 How It Works
 
-**503 Simulation:**
-- Returns HTTP 503 status code
-- Includes retry-after header information
-
-**Logging:**
-- Server-side console logs for all requests
-- Detailed error logs with timestamps and error codes
-- Success logs for normal operations
-
-## 🎓 Learning Outcomes
-
-This project demonstrates:
-- Network failure handling in web applications
-- Structured error logging with JSON format
-- User experience during failures (error messages, loading states)
-- Client-side timeout implementation
-- HTTP status code handling (503)
-- Async/await patterns in JavaScript
-- RESTful API design
-
-## 🐛 Troubleshooting
-
-**Issue:** Server won't start  
-**Solution:** Make sure port 3000 is not in use. Check with `netstat -ano | findstr :3000` and kill the process if needed.
-
-**Issue:** Products not loading  
-**Solution:** Verify the server is running at `http://localhost:3000` and check browser console for errors.
-
-**Issue:** Timeout not triggering  
-**Solution:** Ensure the client timeout (3s) is less than the server delay (5s).
+1. **Mock API** (`/api/products`) returns 10 product objects
+2. **Failure injection** is controlled via `failureMode` query parameter
+3. **Client-side timeout** set to 5 seconds using AbortController
+4. **Server-side delay** of 10 seconds simulates slow network/timeout
+5. **Structured logger** captures all request metadata and errors
+6. **Error banner** displays when failures occur
 
 ## 📝 Notes
 
-- All logs are both displayed in the UI console section AND printed to the browser's developer console
-- The application uses a 3-second timeout threshold on the client side
-- The server simulates a 5-second delay for timeout scenarios
-- Error codes follow a consistent naming convention: `NET_TIMEOUT`, `NET_503`, etc.
+- All logs are printed to the browser console (open DevTools → Console)
+- The timeout simulation uses a 10-second server delay, which triggers a 5-second client timeout
+- The 503 error has a realistic 200ms network latency simulation
+- Products are stored in memory (no database required)
 
-## 🔗 API Endpoints
+## 👨‍💻 Author
 
-- `GET /` - Serves the main application
-- `GET /api/products` - Returns product list (normal operation)
-- `GET /api/products?failure=timeout` - Simulates timeout (5s delay)
-- `GET /api/products?failure=503` - Returns 503 Service Unavailable
-- `GET /health` - Health check endpoint
+Network Failure Simulator - Assignment Submission
 
-## 👤 Author
+---
 
-Created as part of the "Simulate Real-World Failures in a Tiny Web App" assignment.
-
-## 📄 License
-
-MIT License - Feel free to use this project for educational purposes.
-#   S i m u l a t e - R e a l - W o r l d - F a i l u r e s - i n - a - T i n y - W e b - A p p 
- 
- 
+**Failure Type**: Option D - Network Failure (Timeout / 503 Service Unavailable)
